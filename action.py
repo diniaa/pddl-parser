@@ -62,6 +62,8 @@ class Action:
             type_map.append(items)
             variables.append(var)
         for assignment in itertools.product(*type_map):
+            if len(set(assignment)) < len(assignment):
+                continue
             positive_preconditions = self.replace(self.positive_preconditions, variables, assignment)
             negative_preconditions = self.replace(self.negative_preconditions, variables, assignment)
             add_effects = self.replace(self.add_effects, variables, assignment)
